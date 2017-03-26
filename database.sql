@@ -32,8 +32,6 @@ CREATE TABLE `TrackLayout` (
   `Id` int(10) UNSIGNED NOT NULL,
   `Name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `Description` text COLLATE utf8_unicode_ci NOT NULL,
-  `Width` int(11) NOT NULL,
-  `Height` int(11) NOT NULL,
   `Locked` int(11) DEFAULT NULL,
   `ModificationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
