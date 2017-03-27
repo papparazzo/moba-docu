@@ -28,7 +28,7 @@ USE `moba`;
 -- Table structure for table `TrackLayout`
 --
 
-CREATE TABLE `TrackLayout` (
+CREATE TABLE `TrackLayouts` (
   `Id` int(10) UNSIGNED NOT NULL,
   `Name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `Description` text COLLATE utf8_unicode_ci NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `TrackLayout` (
 --
 -- Indexes for table `TrackLayout`
 --
-ALTER TABLE `TrackLayout`
+ALTER TABLE `TrackLayouts`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -54,7 +54,7 @@ ALTER TABLE `TrackLayout`
 --
 -- AUTO_INCREMENT for table `TrackLayout`
 --
-ALTER TABLE `TrackLayout`
+ALTER TABLE `TrackLayouts`
   MODIFY `Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
