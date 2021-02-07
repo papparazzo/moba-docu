@@ -1,0 +1,22 @@
+
+environment: {}
+common:
+    database:
+        connectorType: MYSQL_CONNECTOR
+        usr: default
+        host: localhost
+        pwd: xxxxx
+        db: moba
+    logging:
+        level: FINEST
+    serverConfig:
+        maxClients: 25
+        port: 7000
+globaltimer:
+    colortheme:
+        brightTime: '14:00'
+        condition: AUTO
+        dimTime: '10:00'
+    globaltimer:
+        curModelTime: Mi 00:40
+        multiplicator: 600
