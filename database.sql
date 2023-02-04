@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 01, 2021 at 09:29 PM
--- Server version: 10.3.25-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 7.4.8
+-- Generation Time: Jan 24, 2023 at 07:16 PM
+-- Server version: 10.6.11-MariaDB-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,8 +28,9 @@ CREATE TABLE `BlockSections` (
   `Id` int(10) UNSIGNED NOT NULL,
   `BrakeTriggerContactId` int(10) UNSIGNED NOT NULL,
   `BlockContactId` int(10) UNSIGNED NOT NULL,
-  `TrainId` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `TrainId` int(10) UNSIGNED DEFAULT NULL,
+  `Locked` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,7 @@ CREATE TABLE `FeedbackContacts` (
   `Id` int(10) UNSIGNED NOT NULL,
   `ModulAddress` int(10) UNSIGNED NOT NULL,
   `ContactNumber` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -54,8 +54,8 @@ CREATE TABLE `FeedbackContacts` (
 DROP TABLE IF EXISTS `SwitchDrive`;
 CREATE TABLE `SwitchDrive` (
   `Id` int(11) UNSIGNED NOT NULL,
-  `SwitchStand` enum('STRAIGHT_1','BEND_1','STRAIGHT_2','BEND_2') COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `SwitchStand` enum('STRAIGHT_1','BEND_1','STRAIGHT_2','BEND_2') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -66,12 +66,12 @@ CREATE TABLE `SwitchDrive` (
 DROP TABLE IF EXISTS `TrackLayouts`;
 CREATE TABLE `TrackLayouts` (
   `Id` int(11) UNSIGNED NOT NULL,
-  `Name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
-  `Description` text COLLATE utf8_unicode_ci NOT NULL,
-  `Locked` int(11) DEFAULT NULL,
+  `Name` varchar(256) NOT NULL,
+  `Description` text NOT NULL,
+  `Locked` int(11) UNSIGNED DEFAULT NULL,
   `ModificationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `CreationDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE `TrackLayoutSymbols` (
   `XPos` int(10) UNSIGNED NOT NULL,
   `YPos` int(10) UNSIGNED NOT NULL,
   `Symbol` tinyint(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -99,8 +99,9 @@ CREATE TABLE `Trains` (
   `Id` int(10) UNSIGNED NOT NULL,
   `Address` int(11) UNSIGNED NOT NULL,
   `Speed` int(11) UNSIGNED NOT NULL,
-  `DrivingDirection` enum('FORWARD','BACKWARD') COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `DrivingDirection` enum('FORWARD','BACKWARD') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
 
 --
 -- Indexes for dumped tables
@@ -111,9 +112,9 @@ CREATE TABLE `Trains` (
 --
 ALTER TABLE `BlockSections`
   ADD UNIQUE KEY `index` (`Id`) USING BTREE,
-  ADD KEY `Contact1` (`BlockContactId`),
-  ADD KEY `Contact2` (`BrakeTriggerContactId`),
-  ADD KEY `Train` (`TrainId`);
+  ADD UNIQUE KEY `Contact1` (`BlockContactId`) USING BTREE,
+  ADD UNIQUE KEY `Contact2` (`BrakeTriggerContactId`) USING BTREE,
+  ADD UNIQUE KEY `Train` (`TrainId`) USING BTREE;
 
 --
 -- Indexes for table `FeedbackContacts`
