@@ -1,3 +1,31 @@
+
+
+CREATE TABLE IF NOT EXISTS FunctionAddress (
+    `Id`         int         UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `LocalId`    int         UNSIGNED  ,
+    `Description` varchar(50)     ,
+    `TagId`      int
+);
+
+CREATE TABLE IF NOT EXISTS `Tags` (
+    `Id`       int         UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `ParentId` int(11)     UNSIGNED NOT NULL,
+    `Name`     varchar(25)          NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+/**
+ * Fahrplan
+ */
+CREATE TABLE IF NOT EXISTS `TrainTimeTable` (
+    `Id`       int         UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `TrainId`  int         UNSIGNED,
+    `Weekdays` SET('SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'),
+    `Time`    Time,
+    `From`   int,
+    `To`  int
+) ENGIN
+
 /*M!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19  Distrib 10.11.13-MariaDB, for debian-linux-gnu (x86_64)
 --
@@ -234,3 +262,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-07-13  6:59:30
+
+
+
